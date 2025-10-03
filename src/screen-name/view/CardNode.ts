@@ -18,7 +18,20 @@ export class CardNode extends Rectangle {
         modelViewTransform: ModelViewTransform2,
         providedOptions?: CardNodeOptions) {
 
-        super();
+        const options = optionize<
+            CardNodeOptions,
+            SelfOptions,
+            RectangleOptions
+        >()(
+            {
+                rectSize: new Dimension2(100, 200),
+                cornerRadius: 10,
+                fill: 'red'
+            },
+            providedOptions,
+        );
+
+        super(options);
 
         this.card = card;
 
