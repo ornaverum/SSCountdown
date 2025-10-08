@@ -1,4 +1,4 @@
-import {Node, Rectangle, RectangleOptions} from 'scenerystack/scenery';
+import {DragListener, Node, Rectangle, RectangleOptions} from 'scenerystack/scenery';
 import { Dimension2, Vector2 } from 'scenerystack/dot';
 import {Color} from 'scenerystack/scenery';
 import {Card} from '../model/Card';
@@ -23,20 +23,36 @@ export class CardNode extends Rectangle {
             SelfOptions,
             RectangleOptions
         >()(
-            {
-                rectX: 100,
-                rectY: 100,
-                rectWidth: 100,
-                rectHeight: 200,
+ 
+             {
+                rectX: card.positionProperty.value.x,
+                rectY: card.positionProperty.value.y,
+                rectWidth: card.sizeProperty.value.width,
+                rectHeight: card.sizeProperty.value.height,
                 cornerRadius: 10,
-                fill: 'red'
+                fill: 'red',
+                cursor: 'pointer',
             },
             providedOptions,
         );
-
+        
         super(options);
 
+
+        card.positionProperty.link((position) => {
+            this.translation = modelViewTransform.modelToViewPosition(position);
+        });
+
         this.card = card;
+
+        this.addInputListener(
+            new DragListener({
+                allowTouchSnag: true,
+                positionProperty: card.positionProperty,
+                transform: modelViewTransform,
+            })
+        );
+
 
     }
 

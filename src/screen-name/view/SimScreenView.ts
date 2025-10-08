@@ -14,10 +14,7 @@ export class SimScreenView extends ScreenView {
 
     const viewOffset = new Vector2(this.layoutBounds.centerX, 20);
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
-      viewOffset,
-      1 ,
-      -1 ,
-    );
+      viewOffset, 1, -1 );
 
 
     const resetAllButton = new ResetAllButton({
@@ -33,6 +30,7 @@ export class SimScreenView extends ScreenView {
     const card = new Card(5, 1);
     const cardNode = new CardNode(card, modelViewTransform, {
       center: this.layoutBounds.center
+      
     });
     this.addChild(cardNode);
   }
