@@ -1,6 +1,6 @@
 import { ScreenView, ScreenViewOptions } from "scenerystack/sim";
 import { ModelViewTransform2 } from "scenerystack/phetcommon";
-import { SimModel } from "../model/SimModel.js";
+import { CardsModel } from "../model/CardsModel.ts";
 import { ResetAllButton } from "scenerystack/scenery-phet";
 import { Rectangle, Text } from "scenerystack/scenery";
 import { Card } from "../model/Card.js";
@@ -9,12 +9,13 @@ import { Vector2 } from "scenerystack/dot";
 
 export class SimScreenView extends ScreenView {
 
-  public constructor(model: SimModel, options?: ScreenViewOptions) {
+  public constructor(model: CardsModel, options?: ScreenViewOptions) {
     super(options);
-
-    const viewOffset = new Vector2(this.layoutBounds.centerX, 20);
+    // const viewOffset = new Vector2(this.layoutBounds.centerX, 20);
+    const viewOffset = new Vector2(-75, 100);
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
-      viewOffset, 1, -1 );
+      viewOffset, 1*100, -1*100
+    );
 
 
     const resetAllButton = new ResetAllButton({
@@ -27,12 +28,12 @@ export class SimScreenView extends ScreenView {
     });
     this.addChild(resetAllButton);
 
-    const card = new Card(5, 1);
-    const cardNode = new CardNode(card, modelViewTransform, {
-      center: this.layoutBounds.center
-      
+    model.cards.forEach((card) => {
+      const cardNode = new CardNode(card, modelViewTransform, {
+        center: this.layoutBounds.center
+      });
+      this.addChild(cardNode);
     });
-    this.addChild(cardNode);
   }
 
   public reset(): void {

@@ -12,7 +12,6 @@ export class CardNode extends Rectangle {
 
     public readonly card: Card;
 
-    public static readonly DEFAULT_WIDTH = 100
 
     constructor (card: Card,
         modelViewTransform: ModelViewTransform2,
@@ -25,17 +24,17 @@ export class CardNode extends Rectangle {
         >()(
  
              {
-                rectX: card.positionProperty.value.x,
-                rectY: card.positionProperty.value.y,
-                rectWidth: card.sizeProperty.value.width,
-                rectHeight: card.sizeProperty.value.height,
+                rectX: modelViewTransform.modelToViewX(card.positionProperty.value.x),
+                rectY: modelViewTransform.modelToViewY(card.positionProperty.value.y),
+                rectWidth: Math.abs(modelViewTransform.modelToViewDeltaX(card.sizeProperty.value.width)),
+                rectHeight: Math.abs(modelViewTransform.modelToViewDeltaY(card.sizeProperty.value.height)),
                 cornerRadius: 10,
-                fill: 'red',
+                fill: card.colorProperty ? card.colorProperty.value : Color.white,
                 cursor: 'pointer',
             },
             providedOptions,
         );
-        
+
         super(options);
 
 
