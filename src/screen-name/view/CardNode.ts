@@ -24,7 +24,10 @@ export class CardNode extends Rectangle {
             RectangleOptions
         >()(
             {
-                rectSize: new Dimension2(100, 200),
+                rectX: 100,
+                rectY: 100,
+                rectWidth: 100,
+                rectHeight: 200,
                 cornerRadius: 10,
                 fill: 'red'
             },
