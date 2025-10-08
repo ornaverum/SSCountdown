@@ -51,8 +51,5 @@ export class CardNode extends Rectangle {
                 transform: modelViewTransform,
             })
         );
-
-
     }
-
 }
