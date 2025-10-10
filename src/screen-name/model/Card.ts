@@ -8,7 +8,7 @@ export class Card implements TModel {
     public readonly valueProperty = new NumberProperty(0);
     public readonly sequenceProperty = new NumberProperty(0);
     public readonly positionProperty = new Property<Vector2>(new Vector2(0, 0));
-    public readonly sizeProperty = new Property<Dimension2>(new Dimension2(100, 161));
+    public readonly sizeProperty = new Property<Dimension2>(new Dimension2(161, 100));
     public readonly colorProperty = new Property<Color | string>(Color.red);
 
 
@@ -16,7 +16,7 @@ export class Card implements TModel {
         value: number = 0,
         sequence: number = 0,
         position: Vector2 = new Vector2(0,0),
-        size: Dimension2 = new Dimension2(1,1.61),
+        size: Dimension2 = new Dimension2(1.61,1.00),
         color: Color | string = Color.red
     ){
         this.valueProperty = new NumberProperty(value);

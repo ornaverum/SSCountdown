@@ -9,7 +9,7 @@ export class CardsModel implements TModel {
   constructor() {
     this.cards = [];
     for (let i = 1; i <= this.NUM_CARDS; i++) {
-      const card = new Card(10*i + i, i + 1, new Vector2(i, 0), new Dimension2(1, 1.61));
+      const card = new Card(10*i + i, i + 1, new Vector2(i, 0), new Dimension2(1.61, 1.00));
       card.colorProperty.value = i % 2 === 0 ? 'blue' : 'red';
       this.cards.push(card);
     }

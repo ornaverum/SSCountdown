@@ -30,7 +30,9 @@ export class SimScreenView extends ScreenView {
 
     model.cards.forEach((card) => {
       const cardNode = new CardNode(card, modelViewTransform, {
-        center: this.layoutBounds.center
+        // center: this.layoutBounds.center
+        center: this.layoutBounds.center,
+        // center: modelViewTransform.modelToViewPosition(card.positionProperty.value)
       });
       this.addChild(cardNode);
     });
