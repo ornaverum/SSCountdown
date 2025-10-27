@@ -1,4 +1,4 @@
-import {DragListener, Node, Rectangle, RectangleOptions} from 'scenerystack/scenery';
+import {DragListener, Node, Rectangle, RectangleOptions, AlignBox} from 'scenerystack/scenery';
 import { Dimension2, Vector2 } from 'scenerystack/dot';
 import {Color, Text} from 'scenerystack/scenery';
 import {Card} from '../model/Card';
@@ -56,6 +56,8 @@ export class CardNode extends Rectangle {
             })
         );
 
+        
+
         const valueText = new Text(this.card.valueProperty.value.toString(), {
             font: new PhetFont({
                 size: 18,
@@ -63,9 +65,11 @@ export class CardNode extends Rectangle {
                 }),
                 fill: Color.black,
                 // center: this.center,
-                layoutOptions: {align: 'center'}
             });
+        const alignBox = new AlignBox(valueText,
+            { alignBounds: this.selfBounds, xAlign: 'center', yAlign: 'center' }
+        );
         // valueText.center =  modelViewTransform.modelToViewPosition(new Vector2(0, 0));
-        this.addChild(valueText);
+        this.addChild(alignBox);
     }
 }

@@ -2,7 +2,7 @@ import { ScreenView, ScreenViewOptions } from "scenerystack/sim";
 import { ModelViewTransform2 } from "scenerystack/phetcommon";
 import { CardsModel } from "../model/CardsModel.ts";
 import { ResetAllButton } from "scenerystack/scenery-phet";
-import { Rectangle, Text } from "scenerystack/scenery";
+import { Rectangle, Text, HBox } from "scenerystack/scenery";
 import { Card } from "../model/Card.js";
 import {CardNode} from './CardNode';
 import { Vector2 } from "scenerystack/dot";
@@ -28,13 +28,19 @@ export class SimScreenView extends ScreenView {
     });
     this.addChild(resetAllButton);
 
+    const hBox = new HBox({
+      spacing: 10,
+      top: this.layoutBounds.centerY
+    });
+    this.addChild(hBox);
+
     model.cards.forEach((card) => {
       const cardNode = new CardNode(card, modelViewTransform, {
         // center: this.layoutBounds.center
-        center: this.layoutBounds.center,
+        bottom: this.layoutBounds.centerY,
         // center: modelViewTransform.modelToViewPosition(card.positionProperty.value)
       });
-      this.addChild(cardNode);
+      hBox.addChild(cardNode);
     });
   }
 
