@@ -12,7 +12,7 @@ export class SimScreenView extends ScreenView {
   public constructor(model: CardsModel, options?: ScreenViewOptions) {
     super(options);
     // const viewOffset = new Vector2(this.layoutBounds.centerX, 20);
-    const viewOffset = new Vector2(-75, 100);
+    const viewOffset = new Vector2(0,0); //new Vector2(-75, 100);
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
       viewOffset, 1*100, -1*100
     );

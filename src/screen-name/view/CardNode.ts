@@ -1,4 +1,4 @@
-import {DragListener, Node, Rectangle, RectangleOptions, AlignBox} from 'scenerystack/scenery';
+import {DragListener, Node, Rectangle, RectangleOptions, AlignBox, FireListener} from 'scenerystack/scenery';
 import { Dimension2, Vector2 } from 'scenerystack/dot';
 import {Color, Text} from 'scenerystack/scenery';
 import {Card} from '../model/Card';
@@ -25,8 +25,8 @@ export class CardNode extends Rectangle {
         >()(
  
              {
-                rectX: 0,
-                rectY: 0,
+                // rectX: 0,
+                // rectY: 0,
                 // rectX: modelViewTransform.modelToViewX(card.positionProperty.value.x),
                 // rectY: modelViewTransform.modelToViewY(card.positionProperty.value.y),
                 rectWidth: Math.abs(modelViewTransform.modelToViewDeltaX(card.sizeProperty.value.width)),
@@ -34,7 +34,7 @@ export class CardNode extends Rectangle {
                 cornerRadius: 10,
                 fill: card.colorProperty ? card.colorProperty.value : Color.white,
                 cursor: 'pointer',
-                center: new Vector2(0, 0),
+                // center: new Vector2(0, 0),
             },
             providedOptions,
         );
@@ -42,25 +42,34 @@ export class CardNode extends Rectangle {
         super(options);
 
 
-        card.positionProperty.link((position) => {
-            this.translation = modelViewTransform.modelToViewPosition(position);
-        });
+        // card.positionProperty.link((position) => {
+        //     this.translation = modelViewTransform.modelToViewPosition(position);
+        // });
 
         this.card = card;
 
+        // this.addInputListener(
+        //     new DragListener({
+        //         allowTouchSnag: true,
+        //         positionProperty: card.positionProperty,
+        //         transform: modelViewTransform,
+        //     })
+        // );
+
         this.addInputListener(
-            new DragListener({
-                allowTouchSnag: true,
-                positionProperty: card.positionProperty,
-                transform: modelViewTransform,
+            new FireListener({
+                fire: () => {
+                    this.card.selectedProperty.value = !this.card.selectedProperty.value;
+                    this.fill = this.fill=='gray'? this.card.colorProperty.value : 'gray';
+                }
             })
         );
-
+            
         
 
         const valueText = new Text(this.card.valueProperty.value.toString(), {
             font: new PhetFont({
-                size: 18,
+                size: 48,
                 weight: "bold",
                 }),
                 fill: Color.black,
